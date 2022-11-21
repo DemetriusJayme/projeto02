@@ -1,0 +1,132 @@
+Passos:
+- Definir Colaboração dos participantes do Grupo? Dupla?
+- Criado projeto com seus arquivos e pastas - OK
+- Instalar REACT - OK (npm install) - OK
+- Instalar DOM - OK (npm install react-router-dom) - OK
+- Instalar BOOTSTRAP - OK (npm install bootstrap react-bootstrap) - OK
+- Instalar TOAST - OK (install react-hot-toast) - OK
+- Instalar DATA-FNS - OK (npm install react-hot-toast) - OK
+- Criar repositório no GIT HUB e subir aplicação
+- Criar compartilhamento no GIT HUB?
+- Definir estrutura de dados - 
+- Criar COLLECTION API
+- Codificar pelo VC Code
+- Testar
+- Deployment 
+
+
+Estrutura de Dados 18/11/2022
+
+Obra
+- nome - Nome da Obra
+- data-inicio - Data de início da obra
+- contrato - Número do contrato da obra
+- descricao - Breve descrição da obra
+
+Despesas
+- data - Data da despesa da obra
+- fase - Fase atual da obra
+- fornecedor - Nome do fornecedor
+- valor - Valor da despesa
+
+Diário
+- data - Data do registro no Diário de Obras
+- descricao - Descrição de todos os fatos ocorridos na obra
+- imagens - Imagens coletadas in-loco na visita à obra
+
+
+Estrutura de Dados 20/11/2022
+
+API
+https://ironrest.herokuapp.com/
+Como usar: https://github.com/Tzikas/MONGO_REST
+
+Criar
+https://ironrest.herokuapp.com/demetriusjayme
+
+Após a conversa com a Karen mudei para:
+
+Nova estrutura (concentrada nas compras)
+- id-compra - id (automático)
+- contrato: ""
+- nome-obra - Nome da obra - (combo box fixo - na 3a etapa criar uma tabela) - string
+- fase-obra - Fase da obra - (combo box fixo - na 3a etapa criar uma tabela) - string
+- data-compra - Data da compra do serviço ou material - date
+- data-pagamento - Data do pagamento do serviço ou material - date
+- data-entrega - Data da entrega do serviço ou material - date
+- nome-produto-servico - Descrição sucinta do material ou  serviço - string
+- qtde - Quantidade comprada do serviço ou material - float
+- unidade - Unidade da compra - (combo box fixo) / m2, kg, m, ml, milheiro, unidade, etc - string
+- valor-despesa - Valor bruto do serviço e/ou material - float
+- valor-desconto - Valor do desconto do serviço e/ou material - float
+- nome-fornecedor - Nome do fornecedor (combo box fixo - na 3a etapa criar uma tabela)
+
+Script de criação/inclusão COLLECTION 
+{
+	"contrato": "100/2022",
+	"nomeObra": "Fórum de Anápolis",
+	"faseObra": "Preliminares",
+	"dataCompra": "18/11/2022",
+	"dataPagamento": "18/11/2022",
+	"dataEntrega": "18/11/2022",
+	"nomeProdutoServico": "Barracao de Obra",
+	"qtde": "1",
+	"unidade": "unidade",
+	"valorUnitario": "2000",
+	"valorDesconto": "50",
+	"nomeFornecedor": "Planalto Pre-Moldados"
+},
+{
+	"contrato": "101/2022",
+	"nomeObra": "Fórum de Anápolis",
+	"faseObra": "Fundação",
+	"dataCompra": "19/11/2022",
+	"dataPagamento": "19/11/2022",
+	"dataEntrega": "21/11/2022",
+	"nomeProdutoServico": "Cimento Portland",
+	"qtde":  "50",
+	"unidade": "50kg",
+	"valorUnitario": "40",
+	"valorDesconto": "1",
+	"nomeFornecedor": "Ciplan"
+},
+{
+	"contrato": "102/2022",
+	"nomeObra": "Fórum de Anápolis",
+	"faseObra": "Terraplanagem",
+	"dataCompra": "19/11/2022",
+	"dataPagamento": "19/11/2022",
+	"dataEntrega": "21/11/2022",
+	"nomeProdutoServico": "Bobcat (hora trabalhada)",
+	"qtde":  "100",
+	"unidade": "h",
+	"valorUnitario": "200",
+	"valorDesconto": "10",
+	"nomeFornecedor": "Terraplanagem Silveira"
+},
+{
+	"contrato": "103/2022",
+	"nomeObra": "Fórum de Anápolis",
+	"faseObra": "Estrutura",
+	"dataCompra": "19/11/2022",
+	"dataPagamento": "19/11/2022",
+	"dataEntrega": "21/11/2022",
+	"nomeProdutoServico": "Aço CA50 8mm",
+	"qtde":  "300",
+	"unidade": "barra 12m",
+	"valorUnitario": "150",
+	"valorDesconto": "3",
+	"nomeFornecedor": "Gerdau"
+}
+
+
+
+
+
+
+
+
+ 
+
+
+
