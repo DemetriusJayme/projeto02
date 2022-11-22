@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
-//import ModalCreateUser from "../components/ModalCreateUser";
+import ModalCreateCompras from "../components/ModalCreateCompras";
 import { Link } from "react-router-dom";
 
 function HomePage() {
@@ -36,7 +36,7 @@ function HomePage() {
   return (
     <div>
       <Container>
-        <h1>Despesas</h1>
+        <h1>Obras/Despesas</h1>
         <FloatingLabel
           controlId="floatingInput"
           label="Pesquise por obra/fase/fornecedor"
@@ -104,7 +104,7 @@ function HomePage() {
           </tbody>
         </Table>
 
-        {/*         <ModalCreateUser reload={reload} setReload={setReload} /> */}
+        <ModalCreateCompras reload={reload} setReload={setReload} />
       </Container>
     </div>
   );
