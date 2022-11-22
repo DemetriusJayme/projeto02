@@ -47,19 +47,19 @@ https://ironrest.herokuapp.com/demetriusjayme
 Após a conversa com a Karen mudei para:
 
 Nova estrutura (concentrada nas compras)
-- id-compra - id (automático)
+- .id - id (automático)
 - contrato: ""
-- nome-obra - Nome da obra - (combo box fixo - na 3a etapa criar uma tabela) - string
-- fase-obra - Fase da obra - (combo box fixo - na 3a etapa criar uma tabela) - string
-- data-compra - Data da compra do serviço ou material - date
-- data-pagamento - Data do pagamento do serviço ou material - date
-- data-entrega - Data da entrega do serviço ou material - date
-- nome-produto-servico - Descrição sucinta do material ou  serviço - string
+- nomeObra - Nome da obra - (combo box fixo - na 3a etapa criar uma tabela) - string
+- faseObra - Fase da obra - (combo box fixo - na 3a etapa criar uma tabela) - string
+- dataCompra - Data da compra do serviço ou material - date
+- dataPagamento - Data do pagamento do serviço ou material - date
+- dataEntrega - Data da entrega do serviço ou material - date
+- nomeProdutoServico - Descrição sucinta do material ou  serviço - string
 - qtde - Quantidade comprada do serviço ou material - float
 - unidade - Unidade da compra - (combo box fixo) / m2, kg, m, ml, milheiro, unidade, etc - string
-- valor-despesa - Valor bruto do serviço e/ou material - float
-- valor-desconto - Valor do desconto do serviço e/ou material - float
-- nome-fornecedor - Nome do fornecedor (combo box fixo - na 3a etapa criar uma tabela)
+- valorUnitario - Valor unitario do serviço e/ou material - float
+- valorDesconto - Valor do desconto do serviço e/ou material - float
+- nomeFornecedor - Nome do fornecedor (combo box fixo - na 3a etapa criar uma tabela)
 
 Script de criação/inclusão COLLECTION 
 {
