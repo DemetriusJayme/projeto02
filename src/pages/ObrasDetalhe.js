@@ -200,7 +200,204 @@ function ObrasDetalhe() {
 
   console.log("antes do return");
 
-  return <div>{isLoading && <h1>{compra.contrato}</h1>}</div>;
+  return (
+    <div>
+      {
+        <Container className="my-4">
+          {/*         Formulario apenas para consulta */}
+          {showEdit === false && (
+            <Card className="text-center" bg="light">
+              <Card.Header>
+                {isLoading && <h1>Contrato: {compra.contrato}</h1>}
+                {isLoading && <h1>Obra: {compra.nomeObra}</h1>}
+              </Card.Header>
+              <Card.Body>
+                {isLoading && <h1>Compra: {compra.dataCompra}</h1>}
+                {isLoading && (
+                  <h1>Produto/Servico: {compra.nomeProdutoServico}</h1>
+                )}
+                {isLoading && <h1>Qtde: {compra.qtde}</h1>}
+                {isLoading && <h1>Unidade: {compra.unidade}</h1>}
+                {isLoading && <h1>Valor unitario: {compra.valorUnitario}</h1>}
+                {isLoading && <h1>Valor desconto: {compra.valorDesconto}</h1>}
+              </Card.Body>
+              <Card.Footer className="text-muted">
+                <Row>
+                  <Col>
+                    <Button
+                      variant="outline-secondary"
+                      onClick={() => setShowEdit(true)}
+                    >
+                      Editar Compra
+                    </Button>
+                  </Col>
+                  <Col>
+                    <Button variant="outline-danger" onClick={handleDelete}>
+                      Excluir Compra
+                    </Button>
+                  </Col>
+                </Row>
+              </Card.Footer>
+            </Card>
+          )}
+
+          {/*           Formulario pronto para editar */}
+          {showEdit === true && (
+            <Card className="text-center" bg="light">
+              <Card.Body>
+                <Form>
+                  <Form.Group>
+                    <Form.Label>Contrato</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira o numero do contrato"
+                      name="contrato"
+                      value={form.contrato}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Obra</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira o nome da Obra"
+                      name="obra"
+                      value={form.nomeObra}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Data da compra</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a data da compra"
+                      name="dataCompra"
+                      value={form.dataCompra}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Produto/Servico</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira o nome do produto ou servico"
+                      name="nomeprodutoservico"
+                      value={form.nomeProdutoServico}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Qtde</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a quantidade do produto ou servico"
+                      name="qtde"
+                      value={form.qtde}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Unidade</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a unidade do produto ou servico"
+                      name="unidade"
+                      value={form.unidade}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Valor unitario</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira o valor unitario do produto ou servico"
+                      name="valorunitario"
+                      value={form.valorUnitario}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Fase da Obra</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a fase da obra"
+                      name="faseobra"
+                      value={form.faseObra}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Data do Pagamento</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a data do pagamento"
+                      name="datapagamento"
+                      value={form.dataPagamento}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Data da Entrega</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a data da entrega"
+                      name="dataentrega"
+                      value={form.dataEntrega}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Fornecedor</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira o nome do fornecedor"
+                      name="nomefornecedor"
+                      value={form.nomeFornecedor}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Row>
+                      <Col>
+                        <Button
+                          onClick={handleSubmit}
+                          variant="outline-secondary"
+                        >
+                          Atualizar
+                        </Button>
+                      </Col>
+                    </Row>
+                  </Form.Group>
+                </Form>
+              </Card.Body>
+            </Card>
+          )}
+        </Container>
+      }
+    </div>
+  );
 }
 
 export default ObrasDetalhe;

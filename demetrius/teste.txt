@@ -1,0 +1,13 @@
+   <Container className="my-4">
+      {isLoading === false && (
+        <>
+          {/* Card User */}
+
+          {showEdit === false && (
+            <Card className="text-center" bg="light">
+              <Card.Header>
+                <Card.Title>{compra.compra}</Card.Title>
+              </Card.Header>
+             </Card>)
+)}
+    </Container>
