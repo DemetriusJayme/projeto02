@@ -252,7 +252,7 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira o nome da Obra"
-                      name="obra"
+                      name="nomeObra"
                       value={form.nomeObra}
                       onChange={handleChange}
                       autoFocus
@@ -264,7 +264,7 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira a fase da obra"
-                      name="faseobra"
+                      name="faseObra"
                       value={form.faseObra}
                       onChange={handleChange}
                       autoFocus
@@ -288,7 +288,7 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira a data do pagamento"
-                      name="datapagamento"
+                      name="dataPagamento"
                       value={form.dataPagamento}
                       onChange={handleChange}
                       autoFocus
@@ -300,7 +300,7 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira a data da entrega"
-                      name="dataentrega"
+                      name="dataEntrega"
                       value={form.dataEntrega}
                       onChange={handleChange}
                       autoFocus
@@ -312,7 +312,7 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira o nome do produto ou servico"
-                      name="nomeprodutoservico"
+                      name="nomeProdutoServico"
                       value={form.nomeProdutoServico}
                       onChange={handleChange}
                       autoFocus
@@ -348,7 +348,7 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira o valor unitario do produto ou servico"
-                      name="valorunitario"
+                      name="valorUnitario"
                       value={form.valorUnitario}
                       onChange={handleChange}
                       autoFocus
@@ -360,7 +360,7 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira o valor do desconto do produto ou servico"
-                      name="valordesconto"
+                      name="valorDesconto"
                       value={form.valorDesconto}
                       onChange={handleChange}
                       autoFocus
@@ -372,12 +372,14 @@ function ObrasDetalhe() {
                     <Form.Control
                       type="text"
                       placeholder="Insira o nome do fornecedor"
-                      name="nomefornecedor"
+                      name="nomeFornecedor"
                       value={form.nomeFornecedor}
                       onChange={handleChange}
                       autoFocus
                     />
                   </Form.Group>
+
+                  <h1>{form.qtde * form.valorUnitario}</h1>
 
                   <Form.Group>
                     <Row>

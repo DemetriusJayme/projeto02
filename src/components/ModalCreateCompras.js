@@ -29,8 +29,13 @@ function ModalCreateUser({ reload, setReload }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    //Calculo do valor total
+    const clone = { ...form };
+    clone.valorTotal = clone.valorUnitario * clone.qtde;
+
     try {
-      await axios.post("https://ironrest.cyclic.app/demetriusjayme", form);
+      await axios.post("https://ironrest.cyclic.app/demetriusjayme", clone);
       handleClose(); // fechar o modal
       setForm({
         contrato: "",
@@ -84,7 +89,7 @@ function ModalCreateUser({ reload, setReload }) {
               <Col>
                 <Form.Group className="mb-3">
                   <Form.Label>Nome da Obra</Form.Label>
-                  <Form.Select name="nomeobra" onChange={handleChange}>
+                  <Form.Select name="nomeObra" onChange={handleChange}>
                     <option>Selecione uma opção</option>
                     <option value="Forum de Anapolis">Forum de Anapolis</option>
                     <option value="Novo Centro de Distribuicao">
@@ -111,7 +116,7 @@ function ModalCreateUser({ reload, setReload }) {
               <Col>
                 <Form.Group className="mb-3">
                   <Form.Label>Fase da Obra</Form.Label>
-                  <Form.Select name="faseobra" onChange={handleChange}>
+                  <Form.Select name="faseObra" onChange={handleChange}>
                     <option>Selecione uma opção</option>
                     <option value="Servicos preliminares">
                       Servicos preliminares
@@ -136,7 +141,7 @@ function ModalCreateUser({ reload, setReload }) {
                 <Form.Group className="mb-3">
                   <Form.Label>Produto/Servico</Form.Label>
                   <Form.Select
-                    name="nomeprodutoservico"
+                    name="nomeProdutoServico"
                     onChange={handleChange}
                   >
                     <option>Selecione uma opção</option>
@@ -167,7 +172,7 @@ function ModalCreateUser({ reload, setReload }) {
                   <Form.Control
                     type="number"
                     placeholder="Insira o valor unitario R$"
-                    name="valorunitario"
+                    name="valorUnitario"
                     value={form.valorUnitario}
                     onChange={handleChange}
                   />
@@ -179,7 +184,7 @@ function ModalCreateUser({ reload, setReload }) {
                   <Form.Control
                     type="number"
                     placeholder="Insira o valor do desconto R$"
-                    name="valordesconto"
+                    name="valorDesconto"
                     value={form.valorDesconto}
                     onChange={handleChange}
                   />
@@ -273,7 +278,7 @@ function ModalCreateUser({ reload, setReload }) {
             </Row>
             <Row>
               <Col>
-                <Form.Group>
+                {/*                 <Form.Group>
                   <Form.Label>Adicione a foto do Produto/Servico</Form.Label>
                   <Form.Control
                     type="text"
@@ -282,7 +287,7 @@ function ModalCreateUser({ reload, setReload }) {
                     value={form.qtde}
                     onChange={handleChange}
                   />
-                </Form.Group>
+                </Form.Group> */}
               </Col>
             </Row>
           </Form>
