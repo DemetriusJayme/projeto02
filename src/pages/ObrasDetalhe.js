@@ -22,14 +22,18 @@ function ObrasDetalhe() {
   const [compra, setCompra] = useState({}); //informações do compra que veio da minha API
   const [showEdit, setShowEdit] = useState(false); //controlar a visualização form // true -> form aparece
   const [form, setForm] = useState({
-    compra: "",
+    contrato: "",
+    nomeObra: "",
+    faseObra: "",
+    dataCompra: "",
+    dataPagamento: "",
+    dataEntrega: "",
     nomeProdutoServico: "",
     qtde: "",
     unidade: "",
-    dataCompra: "",
-    faseObra: "",
-    dataPagamento: true,
     valorUnitario: "",
+    valorDesconto: "",
+    nomeFornecedor: "",
   });
 
   const stack = ["React", "JS", "HTML", "CSS", "NodeJS", "MongoDB", "Express"];
@@ -37,8 +41,6 @@ function ObrasDetalhe() {
   const [isLoading, setIsLoading] = useState(true);
   const [reload, setReload] = useState(false);
   const [showTasks, setShowTasks] = useState(false);
-
-  console.log("antes do useEffect");
 
   useEffect(() => {
     //setIsLoading(false);
@@ -53,50 +55,41 @@ function ObrasDetalhe() {
         setIsLoading(true);
       } catch (error) {
         console.log(error);
-        toast.error("Algo deu errado com o get da API.");
+        toast.error("Ocorreu um erro com o GET da API");
       }
     }
     fetchUser();
 
-    return () => {
-      console.log("vai rodar depois do useEffect");
-    };
+    return () => {};
   }, [reload, compraID]);
 
-  console.log("antes do handleChange");
-
   function handleChange(e) {
-    if (e.target.name === "dataPagamento") {
-      setForm({ ...form, dataPagamento: e.target.checked });
+    if (e.target.name === "active") {
+      setForm({ ...form, active: e.target.checked });
       return;
     }
 
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
-  console.log("antes do handleDelete");
-
   async function handleDelete(e) {
     try {
       await axios.delete(
         `https://ironrest.cyclic.app/demetriusjayme/${compraID}`
       );
-      //agora que o usuário está deletado
-      //redirecionaremos ele para a homePage
+      //Apos a exclusao da compra o usuario sera redirecionado para a home
       navigate("/");
-      toast.success("Funcionário deletado com sucesso");
+      toast.success("Compra excluida com sucesso");
     } catch (error) {
       console.log(error);
-      toast.error("Algo deu errado ao deletar esse usuário.");
+      toast.error("Ocorreu um erro ao excluir essa compra");
     }
   }
-
-  console.log("antes do handleSubmit");
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      //clonando o form para que possamos fazer as alterações necessárias
+      //Clonando o form para que possamos fazer as alterações necessárias
       const clone = { ...form };
       delete clone._id;
 
@@ -105,21 +98,19 @@ function ObrasDetalhe() {
         clone
       );
 
-      toast.success("Alterações salvas");
+      toast.success("Alterações efetuadas com sucesso");
       setReload(!reload);
       setShowEdit(false);
     } catch (error) {
       console.log(error);
-      toast.error("Algo deu errado. Tente novamente.");
+      toast.error("Erro ao efetuar as alteracoes. Tente novamente");
     }
   }
-
-  console.log("antes do handleStack");
 
   async function handleStack(e) {
     //console.log(e.target.checked); -> está clicado ou não
     //console.log(e.target.name); -> qual o nome da tech
-    // toda vez que o checkbox é alterado, enviamos essa alteração pra API
+    //Toda vez que o checkbox é alterado, enviamos essa alteração pra API
     try {
       const clone = { ...compra };
       delete clone._id;
@@ -142,11 +133,9 @@ function ObrasDetalhe() {
       setReload(!reload);
     } catch (error) {
       console.log(error);
-      toast.error("Algo deu errado. Tente novamente.");
+      toast.error("Ocorreu um erro. Tente novamente");
     }
   }
-
-  console.log("antes do handleTaskCompletada");
 
   async function handleTaskCompletada(e) {
     e.preventDefault();
@@ -172,11 +161,9 @@ function ObrasDetalhe() {
       setReload(!reload);
     } catch (error) {
       console.log(error);
-      toast.error("Algo deu errado. Tente novamente.");
+      toast.error("Ocorreu um erro. Tente novamente");
     }
   }
-
-  console.log("antes do handleDeleteTask");
 
   async function handleDeleteTask(index) {
     try {
@@ -192,13 +179,11 @@ function ObrasDetalhe() {
       setReload(!reload);
     } catch (error) {
       console.log(error);
-      toast.error("Task não foi excluída");
+      toast.error("Ocorreu um erro ao excluir a TASK");
     }
   }
 
   console.log(form);
-
-  console.log("antes do return");
 
   return (
     <div>
@@ -212,7 +197,10 @@ function ObrasDetalhe() {
                 {isLoading && <h1>Obra: {compra.nomeObra}</h1>}
               </Card.Header>
               <Card.Body>
+                {isLoading && <h1>Fase: {compra.faseObra}</h1>}
                 {isLoading && <h1>Compra: {compra.dataCompra}</h1>}
+                {isLoading && <h1>Pagamento: {compra.dataPagamento}</h1>}
+                {isLoading && <h1>Entrega: {compra.dataEntrega}</h1>}
                 {isLoading && (
                   <h1>Produto/Servico: {compra.nomeProdutoServico}</h1>
                 )}
@@ -220,6 +208,7 @@ function ObrasDetalhe() {
                 {isLoading && <h1>Unidade: {compra.unidade}</h1>}
                 {isLoading && <h1>Valor unitario: {compra.valorUnitario}</h1>}
                 {isLoading && <h1>Valor desconto: {compra.valorDesconto}</h1>}
+                {isLoading && <h1>Fornecedor: {compra.nomeFornecedor}</h1>}
               </Card.Body>
               <Card.Footer className="text-muted">
                 <Row>
@@ -271,12 +260,48 @@ function ObrasDetalhe() {
                   </Form.Group>
 
                   <Form.Group>
+                    <Form.Label>Fase da Obra</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a fase da obra"
+                      name="faseobra"
+                      value={form.faseObra}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
                     <Form.Label>Data da compra</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="Insira a data da compra"
                       name="dataCompra"
                       value={form.dataCompra}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Data do Pagamento</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a data do pagamento"
+                      name="datapagamento"
+                      value={form.dataPagamento}
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+
+                  <Form.Group>
+                    <Form.Label>Data da Entrega</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="Insira a data da entrega"
+                      name="dataentrega"
+                      value={form.dataEntrega}
                       onChange={handleChange}
                       autoFocus
                     />
@@ -331,36 +356,12 @@ function ObrasDetalhe() {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Fase da Obra</Form.Label>
+                    <Form.Label>Valor desconto</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira a fase da obra"
-                      name="faseobra"
-                      value={form.faseObra}
-                      onChange={handleChange}
-                      autoFocus
-                    />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Label>Data do Pagamento</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Insira a data do pagamento"
-                      name="datapagamento"
-                      value={form.dataPagamento}
-                      onChange={handleChange}
-                      autoFocus
-                    />
-                  </Form.Group>
-
-                  <Form.Group>
-                    <Form.Label>Data da Entrega</Form.Label>
-                    <Form.Control
-                      type="text"
-                      placeholder="Insira a data da entrega"
-                      name="dataentrega"
-                      value={form.dataEntrega}
+                      placeholder="Insira o valor do desconto do produto ou servico"
+                      name="valordesconto"
+                      value={form.valorDesconto}
                       onChange={handleChange}
                       autoFocus
                     />

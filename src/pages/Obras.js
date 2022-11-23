@@ -26,7 +26,6 @@ function HomePage() {
     }
 
     fetchUsers();
-    console.log("Dentro do useEffect da home!!");
   }, [reload]);
 
   function handleSearch(e) {
@@ -36,7 +35,7 @@ function HomePage() {
   return (
     <div>
       <Container>
-        <h1>Obras/Despesas</h1>
+        <h1>Obras/Compras</h1>
         <FloatingLabel
           controlId="floatingInput"
           label="Pesquise por obra/fase/fornecedor"

@@ -5,7 +5,7 @@ function Home() {
     <div className="home">
       <h1>home</h1>
       <div>
-        <Link to="/obras">Ir para Obras/Despesas</Link>
+        <Link to="/obras">Ir para Obras/Compras</Link>
       </div>
       <div>
         <Link to="/fornecedores">Ir para Fornecedores</Link>
