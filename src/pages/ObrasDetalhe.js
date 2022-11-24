@@ -16,11 +16,11 @@ import {
 } from "react-bootstrap";
 
 function ObrasDetalhe() {
-  const { compraID } = useParams(); //mesmo compra do parametro de ROTA (app.js)
-  const navigate = useNavigate(); // instanciar o useNavigate()
+  const { compraID } = useParams(); //Mesmo compra do parametro de ROTA (app.js)
+  const navigate = useNavigate(); //Instanciar o useNavigate()
 
-  const [compra, setCompra] = useState({}); //informações da compra que vieram da minha API
-  const [showEdit, setShowEdit] = useState(false); //controlar a visualização form // true -> form aparece
+  const [compra, setCompra] = useState({}); //Informações provenientes da compra que vieram da minha API
+  const [showEdit, setShowEdit] = useState(false); //Controla a visualização do form. Se true o form aparece
   const [form, setForm] = useState({
     contrato: "",
     nomeObra: "",
@@ -77,7 +77,7 @@ function ObrasDetalhe() {
       await axios.delete(
         `https://ironrest.cyclic.app/demetriusjayme/${compraID}`
       );
-      //Apos a exclusao da compra o usuario sera redirecionado para a home novamente
+      //Apos a exclusão da compra o usuario será redirecionado para a página home novamente
       navigate("/");
       toast.success("Compra excluida com sucesso");
     } catch (error) {
@@ -89,7 +89,7 @@ function ObrasDetalhe() {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      //Clonando o form para que possamos fazer as alterações necessárias
+      //Clonando o form para que possamos efetuar as alterações necessárias
       const clone = { ...form };
       delete clone._id;
 
@@ -103,7 +103,7 @@ function ObrasDetalhe() {
       setShowEdit(false);
     } catch (error) {
       console.log(error);
-      toast.error("Erro ao efetuar as alteracoes. Tente novamente");
+      toast.error("Erro ao efetuar as alterações. Tente novamente");
     }
   }
 
@@ -115,15 +115,15 @@ function ObrasDetalhe() {
       const clone = { ...compra };
       delete clone._id;
 
-      // let newcompra = filter: clone = clone.filter( el => el !== e.target.name);
+      //let newcompra = filter: clone = clone.filter( el => el !== e.target.name);
 
       if (e.target.checked === true) {
         clone.stack.push(e.target.name);
       }
 
       if (e.target.checked === false) {
-        const index = clone.stack.indexOf(e.target.name); //acho o index do elemento que eu cliquei
-        clone.stack.splice(index, 1); //retiro o elemento da array
+        const index = clone.stack.indexOf(e.target.name); //Acho o index do elemento que eu cliquei
+        clone.stack.splice(index, 1); //Retiro o elemento do array
       }
 
       await axios.put(
@@ -141,7 +141,7 @@ function ObrasDetalhe() {
     e.preventDefault();
 
     if (!form.task) {
-      // se form.task for uma string vazia ela é false -> então eu nego -> true
+      //Se form.task for uma string vazia ela é false. Então eu nego -> true
       toast.error("Por favor, adicione uma task primeiro");
       return;
     }
@@ -203,12 +203,20 @@ function ObrasDetalhe() {
                 {isLoading && <h3>Pagamento: {compra.dataPagamento}</h3>}
                 {isLoading && <h3>Entrega: {compra.dataEntrega}</h3>}
                 {isLoading && (
-                  <h3>Produto/Servico: {compra.nomeProdutoServico}</h3>
+                  <h3>Produto/Serviço: {compra.nomeProdutoServico}</h3>
                 )}
-                {isLoading && <h3>Qtde: {compra.qtde}</h3>}
+                {isLoading && <h3>Qtde: {Number(compra.qtde).toFixed(2)}</h3>}
                 {isLoading && <h3>Unidade: {compra.unidade}</h3>}
-                {isLoading && <h3>Valor unitario: {Number(compra.valorUnitario).toFixed(2)}</h3>}
-                {isLoading && <h3>Valor desconto: {compra.valorDesconto}</h3>}
+                {isLoading && (
+                  <h3>
+                    Valor unitário: {Number(compra.valorUnitario).toFixed(2)}
+                  </h3>
+                )}
+                {isLoading && (
+                  <h3>
+                    Valor desconto: {Number(compra.valorDesconto).toFixed(2)}
+                  </h3>
+                )}
                 {isLoading && (
                   <h3>
                     Valor total:
@@ -247,7 +255,7 @@ function ObrasDetalhe() {
                     <Form.Label>Contrato</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira o numero do contrato"
+                      placeholder="Insira o número do contrato"
                       name="contrato"
                       value={form.contrato}
                       onChange={handleChange}
@@ -259,7 +267,7 @@ function ObrasDetalhe() {
                     <Form.Label>Obra</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira o nome da Obra"
+                      placeholder="Insira o nome da obra"
                       name="nomeObra"
                       value={form.nomeObra}
                       onChange={handleChange}
@@ -319,7 +327,7 @@ function ObrasDetalhe() {
                     <Form.Label>Produto/Servico</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira o nome do produto ou servico"
+                      placeholder="Insira o nome do produto ou serviço"
                       name="nomeProdutoServico"
                       value={form.nomeProdutoServico}
                       onChange={handleChange}
@@ -331,7 +339,7 @@ function ObrasDetalhe() {
                     <Form.Label>Qtde</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira a quantidade do produto ou servico"
+                      placeholder="Insira a quantidade do produto ou serviço"
                       name="qtde"
                       value={form.qtde}
                       onChange={handleChange}
@@ -343,7 +351,7 @@ function ObrasDetalhe() {
                     <Form.Label>Unidade</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira a unidade do produto ou servico"
+                      placeholder="Insira a unidade do produto ou serviço"
                       name="unidade"
                       value={form.unidade}
                       onChange={handleChange}
@@ -352,10 +360,10 @@ function ObrasDetalhe() {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Valor unitario</Form.Label>
+                    <Form.Label>Valor unitário</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira o valor unitario do produto ou servico"
+                      placeholder="Insira o valor unitário do produto ou serviço"
                       name="valorUnitario"
                       value={form.valorUnitario}
                       onChange={handleChange}
@@ -367,7 +375,7 @@ function ObrasDetalhe() {
                     <Form.Label>Valor desconto</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Insira o valor do desconto do produto ou servico"
+                      placeholder="Insira o valor do desconto do produto ou serviço"
                       name="valorDesconto"
                       value={form.valorDesconto}
                       onChange={handleChange}
@@ -388,7 +396,7 @@ function ObrasDetalhe() {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Valor total -</Form.Label>
+                    <Form.Label>Valor total</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="I"
@@ -400,7 +408,6 @@ function ObrasDetalhe() {
                       autoFocus
                     />
                   </Form.Group>
-                  {/*                   <h1>{form.qtde * form.valorUnitario}</h1> */}
 
                   <Form.Group>
                     <Row>

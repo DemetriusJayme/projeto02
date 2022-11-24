@@ -15,6 +15,7 @@ function HomePage() {
   const [compras, setCompras] = useState([]);
   const [reload, setReload] = useState(false);
   const [search, setSearch] = useState("");
+  const [valortotal, setValorTotal] = useState(0);
 
   useEffect(() => {
     async function fetchUsers() {
@@ -23,6 +24,14 @@ function HomePage() {
         "https://ironrest.cyclic.app/demetriusjayme"
       );
       setCompras(response.data);
+
+      let total = response.data.reduce((acc, compra) => {
+        return (
+          acc + +compra.qtde * (+compra.valorUnitario - +compra.valorDesconto)
+        );
+      }, 0);
+
+      setValorTotal(total);
     }
 
     fetchUsers();
@@ -61,9 +70,7 @@ function HomePage() {
               <th>Action</th>
             </tr>
           </thead>
-          {/*           <tfoot>
-            <h1>Valor total da compras:</h1>
-          </tfoot> */}
+
           <tbody>
             {compras
               .filter((compra) => {
@@ -86,8 +93,12 @@ function HomePage() {
                 );
               })
               .map((compra) => {
-                console.log(+compra.qtde *
-                        (+compra.valorUnitario - +compra.valorDesconto))
+                console.log(
+                  +compra.qtde * (+compra.valorUnitario - +compra.valorDesconto)
+                );
+
+                //setValorTotal(valortotal + (+compra.qtde * (+compra.valorUnitario - +compra.valorDesconto)));
+
                 return (
                   <tr key={compra._id}>
                     <td>{compra.contrato}</td>
@@ -96,6 +107,7 @@ function HomePage() {
                     <td>{compra.faseObra}</td>
                     <td>{compra.nomeFornecedor}</td>
                     <td>
+                      {}
                       {+compra.qtde *
                         (+compra.valorUnitario - +compra.valorDesconto)}
                     </td>
@@ -111,7 +123,15 @@ function HomePage() {
               })}
           </tbody>
           <tfoot>
-            <div>Valor total gasto: </div>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>{valortotal.toFixed(2)}</td>
+              <th>Valor total gasto</th>
+            </tr>
           </tfoot>
         </Table>
 
