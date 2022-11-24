@@ -19,7 +19,7 @@ function ObrasDetalhe() {
   const { compraID } = useParams(); //mesmo compra do parametro de ROTA (app.js)
   const navigate = useNavigate(); // instanciar o useNavigate()
 
-  const [compra, setCompra] = useState({}); //informações do compra que veio da minha API
+  const [compra, setCompra] = useState({}); //informações da compra que vieram da minha API
   const [showEdit, setShowEdit] = useState(false); //controlar a visualização form // true -> form aparece
   const [form, setForm] = useState({
     contrato: "",
@@ -77,7 +77,7 @@ function ObrasDetalhe() {
       await axios.delete(
         `https://ironrest.cyclic.app/demetriusjayme/${compraID}`
       );
-      //Apos a exclusao da compra o usuario sera redirecionado para a home
+      //Apos a exclusao da compra o usuario sera redirecionado para a home novamente
       navigate("/");
       toast.success("Compra excluida com sucesso");
     } catch (error) {
@@ -193,22 +193,29 @@ function ObrasDetalhe() {
           {showEdit === false && (
             <Card className="text-center" bg="light">
               <Card.Header>
-                {isLoading && <h1>Contrato: {compra.contrato}</h1>}
-                {isLoading && <h1>Obra: {compra.nomeObra}</h1>}
+                {isLoading && <h3>Contrato: {compra.contrato}</h3>}
+                {isLoading && <h3>Obra: {compra.nomeObra}</h3>}
               </Card.Header>
               <Card.Body>
-                {isLoading && <h1>Fase: {compra.faseObra}</h1>}
-                {isLoading && <h1>Compra: {compra.dataCompra}</h1>}
-                {isLoading && <h1>Pagamento: {compra.dataPagamento}</h1>}
-                {isLoading && <h1>Entrega: {compra.dataEntrega}</h1>}
+                {isLoading && <h3>Fase: {compra.faseObra}</h3>}
+                {isLoading && <h3>Compra: {compra.dataCompra}</h3>}
+                {isLoading && <h3>Pagamento: {compra.dataPagamento}</h3>}
+                {isLoading && <h3>Entrega: {compra.dataEntrega}</h3>}
                 {isLoading && (
-                  <h1>Produto/Servico: {compra.nomeProdutoServico}</h1>
+                  <h3>Produto/Servico: {compra.nomeProdutoServico}</h3>
                 )}
-                {isLoading && <h1>Qtde: {compra.qtde}</h1>}
-                {isLoading && <h1>Unidade: {compra.unidade}</h1>}
-                {isLoading && <h1>Valor unitario: {compra.valorUnitario}</h1>}
-                {isLoading && <h1>Valor desconto: {compra.valorDesconto}</h1>}
-                {isLoading && <h1>Fornecedor: {compra.nomeFornecedor}</h1>}
+                {isLoading && <h3>Qtde: {compra.qtde}</h3>}
+                {isLoading && <h3>Unidade: {compra.unidade}</h3>}
+                {isLoading && <h3>Valor unitario: {compra.valorUnitario}</h3>}
+                {isLoading && <h3>Valor desconto: {compra.valorDesconto}</h3>}
+                {isLoading && (
+                  <h3>
+                    Valor total:{" "}
+                    {compra.qtde *
+                      (compra.ValorUnitario - compra.valorDesconto)}
+                  </h3>
+                )}
+                {isLoading && <h3>Fornecedor: {compra.nomeFornecedor}</h3>}
               </Card.Body>
               <Card.Footer className="text-muted">
                 <Row>
@@ -379,7 +386,20 @@ function ObrasDetalhe() {
                     />
                   </Form.Group>
 
-                  <h1>{form.qtde * form.valorUnitario}</h1>
+                  <Form.Group>
+                    <Form.Label>Valor total</Form.Label>
+                    <Form.Control
+                      type="text"
+                      placeholder="I"
+                      name="valorTotal"
+                      value={
+                        form.qtde * (form.valorUnitario - form.valorDesconto)
+                      }
+                      onChange={handleChange}
+                      autoFocus
+                    />
+                  </Form.Group>
+                  {/*                   <h1>{form.qtde * form.valorUnitario}</h1> */}
 
                   <Form.Group>
                     <Row>

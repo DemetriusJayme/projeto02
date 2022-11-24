@@ -207,6 +207,7 @@ function ModalCreateUser({ reload, setReload }) {
                   <Form.Label>Unidade</Form.Label>
                   <Form.Select name="unidade" onChange={handleChange}>
                     <option>Selecione uma opção</option>
+                    <option value="unitário">unitário</option>
                     <option value="m">m</option>
                     <option value="m2">m2</option>
                     <option value="ml">ml</option>
@@ -225,6 +226,7 @@ function ModalCreateUser({ reload, setReload }) {
                   <Form.Label>Fornecedor</Form.Label>
                   <Form.Select name="nomeFornecedor" onChange={handleChange}>
                     <option>Selecione uma opção</option>
+                    <option value="CREA-GO">CREA-GO</option>
                     <option value="Gerdau">Gerdau</option>
                     <option value="Arcelor Mittal">Arcelor Mittal</option>
                     <option value="Casa Iracema">Casa Iracema</option>
@@ -237,6 +239,9 @@ function ModalCreateUser({ reload, setReload }) {
                       Sao Jorge Materiais de Acabamento
                     </option>
                     <option value="Ferragista NTM">Ferragista NTM</option>
+                    <option value="Rei Davi Terraplanagem">
+                    Rei Davi Terraplanagem
+                    </option>
                   </Form.Select>
                 </Form.Group>
               </Col>

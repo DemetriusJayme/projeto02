@@ -38,7 +38,7 @@ function HomePage() {
         <h1>Obras/Compras</h1>
         <FloatingLabel
           controlId="floatingInput"
-          label="Pesquise por obra/fase/fornecedor"
+          label="Pesquise por contrato/obra/produto ou serviço/fase/fornecedor"
           className="my-3"
         >
           <Form.Control
@@ -54,14 +54,16 @@ function HomePage() {
             <tr>
               <th>Contrato</th>
               <th>Obra</th>
-              {/*               <th>Progresso</th> */}
-              {/*               <th>Status</th> */}
-              <th>Produto/Servico</th>
+              <th>Produto/Serviço</th>
               <th>fase</th>
               <th>Fornecedor</th>
               <th>Action</th>
+              <th>Valor</th>
             </tr>
           </thead>
+{/*           <tfoot>
+            <h1>Valor total da compras:</h1>
+          </tfoot> */}
           <tbody>
             {compras
               .filter((compra) => {
@@ -72,7 +74,15 @@ function HomePage() {
                   compra.nomeObra
                     .toLowerCase()
                     .includes(search.toLowerCase()) ||
-                  compra.faseObra.toLowerCase().includes(search.toLowerCase())
+                  compra.nomeProdutoServico
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  compra.faseObra
+                    .toLowerCase()
+                    .includes(search.toLowerCase()) ||
+                  compra.nomeFornecedor
+                    .toLowerCase()
+                    .includes(search.toLowerCase())
                 );
               })
               .map((compra) => {
@@ -80,14 +90,7 @@ function HomePage() {
                   <tr key={compra._id}>
                     <td>{compra.contrato}</td>
                     <td>{compra.nomeObra}</td>
-                    <td>
-                      {compra.nomeProdutoServico}
-                      {/*                       <ProgressBar
-                        animated
-                        now={compra.progresso}
-                        label={`${compra.progresso}%`}
-                      /> */}
-                    </td>
+                    <td>{compra.nomeProdutoServico}</td>
                     <td>{compra.faseObra}</td>
                     <td>{compra.nomeFornecedor}</td>
                     <td>
@@ -97,6 +100,7 @@ function HomePage() {
                         </Button>
                       </Link>
                     </td>
+                    <td>{compra.valorUnitario}</td>
                   </tr>
                 );
               })}

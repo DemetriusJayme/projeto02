@@ -14,6 +14,7 @@ function NavBar() {
               height="30"
               className="d-inline-block align-top"
             />{" "}
+            Tribunal de Justiça do Estado de Goiás - Diretoria de Engenharia -
             Controle de Obras
           </Navbar.Brand>
         </Link>
