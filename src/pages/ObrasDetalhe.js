@@ -38,7 +38,7 @@ function ObrasDetalhe() {
 
   const stack = ["React", "JS", "HTML", "CSS", "NodeJS", "MongoDB", "Express"];
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [reload, setReload] = useState(false);
   const [showTasks, setShowTasks] = useState(false);
 
@@ -184,6 +184,7 @@ function ObrasDetalhe() {
   }
 
   console.log(form);
+  console.log(compra);
 
   return (
     <div>
@@ -206,13 +207,13 @@ function ObrasDetalhe() {
                 )}
                 {isLoading && <h3>Qtde: {compra.qtde}</h3>}
                 {isLoading && <h3>Unidade: {compra.unidade}</h3>}
-                {isLoading && <h3>Valor unitario: {compra.valorUnitario}</h3>}
+                {isLoading && <h3>Valor unitario: {Number(compra.valorUnitario).toFixed(2)}</h3>}
                 {isLoading && <h3>Valor desconto: {compra.valorDesconto}</h3>}
                 {isLoading && (
                   <h3>
-                    Valor total:{" "}
-                    {compra.qtde *
-                      (compra.ValorUnitario - compra.valorDesconto)}
+                    Valor total:
+                    {+compra.qtde *
+                      (+compra.valorUnitario - +compra.valorDesconto)}
                   </h3>
                 )}
                 {isLoading && <h3>Fornecedor: {compra.nomeFornecedor}</h3>}
@@ -387,13 +388,13 @@ function ObrasDetalhe() {
                   </Form.Group>
 
                   <Form.Group>
-                    <Form.Label>Valor total</Form.Label>
+                    <Form.Label>Valor total -</Form.Label>
                     <Form.Control
                       type="text"
                       placeholder="I"
                       name="valorTotal"
                       value={
-                        form.qtde * (form.valorUnitario - form.valorDesconto)
+                        +form.qtde * (+form.valorUnitario - +form.valorDesconto)
                       }
                       onChange={handleChange}
                       autoFocus

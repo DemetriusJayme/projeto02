@@ -57,11 +57,11 @@ function HomePage() {
               <th>Produto/Serviço</th>
               <th>fase</th>
               <th>Fornecedor</th>
-              <th>Action</th>
               <th>Valor</th>
+              <th>Action</th>
             </tr>
           </thead>
-{/*           <tfoot>
+          {/*           <tfoot>
             <h1>Valor total da compras:</h1>
           </tfoot> */}
           <tbody>
@@ -86,6 +86,8 @@ function HomePage() {
                 );
               })
               .map((compra) => {
+                console.log(+compra.qtde *
+                        (+compra.valorUnitario - +compra.valorDesconto))
                 return (
                   <tr key={compra._id}>
                     <td>{compra.contrato}</td>
@@ -94,17 +96,23 @@ function HomePage() {
                     <td>{compra.faseObra}</td>
                     <td>{compra.nomeFornecedor}</td>
                     <td>
+                      {+compra.qtde *
+                        (+compra.valorUnitario - +compra.valorDesconto)}
+                    </td>
+                    <td>
                       <Link to={`/obrasdetalhe/${compra._id}`}>
                         <Button variant="outline-secondary" size="sm">
                           Detalhes
                         </Button>
                       </Link>
                     </td>
-                    <td>{compra.valorUnitario}</td>
                   </tr>
                 );
               })}
           </tbody>
+          <tfoot>
+            <div>Valor total gasto: </div>
+          </tfoot>
         </Table>
 
         <ModalCreateCompras reload={reload} setReload={setReload} />
